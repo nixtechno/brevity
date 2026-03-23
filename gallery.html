@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore Brevity Anderson's portfolio across conferences and exhibitions, virtual and hybrid events, and strategic high-level meetings."
+    />
+    <title>Gallery | Brevity Anderson</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <style>
+      /* Gallery Page Specific Styles */
+      .gallery-intro-section {
+        background: var(--off-white);
+      }
+
+      .gallery-filter {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .gallery-filter button {
+        background: transparent;
+        border: 2px solid var(--light-gray);
+        color: var(--medium-gray);
+        padding: 12px 30px;
+        margin: 5px;
+        border-radius: 30px;
+        font-family: var(--font-heading);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: var(--transition-smooth);
+      }
+
+      .gallery-filter button:hover,
+      .gallery-filter button.active {
+        background: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+        color: var(--white);
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        margin-bottom: 24px;
+        cursor: pointer;
+        scroll-margin-top: 140px;
+        transition:
+          transform 0.35s ease,
+          box-shadow 0.35s ease,
+          border-color 0.35s ease;
+        border: 1px solid transparent;
+      }
+
+      .gallery-item:target {
+        transform: translateY(-6px);
+        box-shadow: 0 26px 60px rgba(20, 59, 102, 0.16);
+        border-color: rgba(65, 196, 224, 0.4);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: var(--transition-smooth);
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to top,
+          rgba(20, 59, 102, 0.95) 0%,
+          rgba(20, 59, 102, 0.4) 50%,
+          transparent 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 30px;
+        opacity: 0;
+        transition: var(--transition-smooth);
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      .gallery-overlay-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: var(--accent-cyan);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition-smooth);
+      }
+
+      .gallery-overlay-icon i {
+        color: var(--white);
+        font-size: 1.5rem;
+      }
+
+      .gallery-overlay h5 {
+        color: var(--white);
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+      }
+
+      .gallery-overlay p {
+        color: var(--accent-cyan);
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      .gallery-overlay .event-date {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.85rem;
+        margin-top: 5px;
+      }
+
+      /* Featured Event Section */
+      .featured-event-section {
+        background: var(--white);
+      }
+
+      .featured-event-card {
+        background: var(--off-white);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: var(--transition-smooth);
+      }
+
+      .featured-event-card:hover {
+        box-shadow: 0 25px 60px rgba(20, 59, 102, 0.15);
+      }
+
+      .featured-event-image {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .featured-event-image img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        transition: var(--transition-smooth);
+      }
+
+      .featured-event-card:hover .featured-event-image img {
+        transform: scale(1.05);
+      }
+
+      .featured-event-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--accent-cyan);
+        color: var(--white);
+        padding: 8px 20px;
+        border-radius: 30px;
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .featured-event-content {
+        padding: 40px;
+      }
+
+      .featured-event-content h3 {
+        font-size: 1.8rem;
+        color: var(--primary-navy);
+        margin-bottom: 15px;
+      }
+
+      .featured-event-content p {
+        color: var(--text-color);
+        margin-bottom: 25px;
+        line-height: 1.8;
+      }
+
+      .featured-event-meta {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 25px;
+      }
+
+      .featured-event-meta-item {
+        display: flex;
+        align-items: center;
+        color: var(--medium-gray);
+        font-size: 0.9rem;
+      }
+
+      .featured-event-meta-item i {
+        color: var(--accent-cyan);
+        margin-right: 10px;
+        font-size: 1.1rem;
+      }
+
+      /* Event Stats Section */
+      .event-stats-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary-navy) 0%,
+          var(--dark-navy) 100%
+        );
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .event-stats-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(65, 196, 224, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+
+      .event-stats-section::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 90px 90px;
+        opacity: 0.22;
+        pointer-events: none;
+      }
+
+      .event-stat-box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 36px 22px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        backdrop-filter: blur(6px);
+        transition: transform 0.35s ease, border-color 0.35s ease,
+          box-shadow 0.35s ease, background 0.35s ease;
+      }
+
+      .event-stat-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent 18%,
+          rgba(255, 255, 255, 0.16) 50%,
+          transparent 82%
+        );
+        transform: translateX(-130%);
+        transition: transform 0.9s ease;
+      }
+
+      .event-stat-box:hover {
+        transform: translateY(-8px);
+        border-color: rgba(65, 196, 224, 0.38);
+        box-shadow: 0 24px 45px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .event-stat-box:hover::before {
+        transform: translateX(130%);
+      }
+
+      .event-stat-box i {
+        font-size: 3rem;
+        color: var(--accent-cyan);
+        margin-bottom: 20px;
+        display: inline-flex;
+        width: 84px;
+        height: 84px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(65, 196, 224, 0.1);
+        box-shadow:
+          0 0 0 0 rgba(65, 196, 224, 0.2),
+          0 18px 30px rgba(65, 196, 224, 0.12);
+        animation: statPulse 4.6s ease-in-out infinite;
+      }
+
+      .event-stat-box h4 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 10px;
+      }
+
+      .event-stat-box p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+      }
+
+      @keyframes statPulse {
+        0%,
+        100% {
+          transform: translateY(0);
+          box-shadow:
+            0 0 0 0 rgba(65, 196, 224, 0.18),
+            0 18px 30px rgba(65, 196, 224, 0.12);
+        }
+        50% {
+          transform: translateY(-6px);
+          box-shadow:
+            0 0 0 14px rgba(65, 196, 224, 0.02),
+            0 24px 36px rgba(65, 196, 224, 0.16);
+        }
+      }
+
+      /* Video Section */
+      .video-section {
+        background: var(--off-white);
+      }
+
+      .video-wrapper {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(20, 59, 102, 0.15);
+        aspect-ratio: 16 / 9;
+        background: #000;
+      }
+
+      .video-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .video-wrapper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(13, 40, 68, 0.12) 0%,
+          rgba(13, 40, 68, 0.62) 100%
+        );
+      }
+
+      .video-link {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .video-play-btn {
+        width: 104px;
+        height: 104px;
+        border-radius: 50%;
+        background: rgba(65, 196, 224, 0.92);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow:
+          0 18px 38px rgba(65, 196, 224, 0.34),
+          0 0 0 18px rgba(255, 255, 255, 0.08);
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
+      }
+
+      .video-play-btn i {
+        font-size: 2.6rem;
+        margin-left: 6px;
+      }
+
+      .video-link:hover .video-play-btn {
+        transform: scale(1.08);
+        background: var(--accent-cyan-dark);
+      }
+
+      .video-caption {
+        position: absolute;
+        left: 24px;
+        bottom: 24px;
+        z-index: 2;
+        color: var(--white);
+        max-width: 360px;
+      }
+
+      .video-caption span {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        font-family: var(--font-heading);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 1.6px;
+      }
+
+      .video-caption strong {
+        display: block;
+        font-size: 1.15rem;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 991.98px) {
+        .gallery-item img {
+          height: 250px;
+        }
+
+        .featured-event-image img {
+          height: 280px;
+        }
+
+        .event-stat-box {
+          margin-bottom: 30px;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        .gallery-filter {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+          margin-bottom: 36px;
+        }
+
+        .gallery-filter button {
+          padding: 10px 16px;
+          font-size: 0.75rem;
+          margin: 0;
+        }
+
+        .gallery-item img {
+          height: 220px;
+        }
+
+        .featured-event-content {
+          padding: 28px 22px;
+        }
+
+        .featured-event-content h3 {
+          font-size: 1.5rem;
+        }
+
+        .featured-event-meta {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .video-play-btn {
+          width: 78px;
+          height: 78px;
+          box-shadow:
+            0 14px 30px rgba(65, 196, 224, 0.28),
+            0 0 0 12px rgba(255, 255, 255, 0.08);
+        }
+
+        .video-play-btn i {
+          font-size: 2rem;
+        }
+
+        .video-caption {
+          left: 18px;
+          right: 18px;
+          bottom: 18px;
+          max-width: none;
+        }
+
+        .video-caption strong {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top scrolled" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="BREVITY_logo.png" alt="Brevity Anderson Logo" />
+          <span class="navbar-brand-text">Brevity<span>Anderson</span></span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about-us.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="clientele.html">Clientele</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="gallery.html">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="container">
+        <div class="page-header-content" data-aos="fade-up">
+          <h1 class="page-header-title">Gallery</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Gallery
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Gallery Intro Section -->
+    <section class="section-padding gallery-intro-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="section-header" data-aos="fade-up">
+              <span class="section-label">Our Portfolio</span>
+              <h2 class="section-title">Our Work in Trade Event Production</h2>
+              <p class="section-description">
+                Explore our portfolio of world-class conferences, exhibitions,
+                virtual and hybrid events, and strategic high-level meetings
+                that have brought together industry leaders from around the
+                globe.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Filter Section -->
+    <section class="section-padding bg-white">
+      <div class="container">
+        <div class="gallery-filter" data-aos="fade-up">
+          <button class="active" data-filter="all">All Events</button>
+          <button data-filter="nies">N.I.E.S</button>
+          <button data-filter="nips">N.I.P.S</button>
+          <button data-filter="other">Other Events</button>
+        </div>
+        <div class="row g-4 gallery-container">
+          <!-- NIES 2025 -->
+          <div
+            id="nies-2025"
+            class="col-md-6 col-lg-4 gallery-item"
+            data-category="nies"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <img
+              src="img/Gallery/NUPRC_3RD_Anniversary.jfif"
+              alt="NIES 2025"
+            />
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-icon">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5>N.I.E.S 2025</h5>
+              <p>Nigeria International Energy Summit</p>
+              <span class="event-date"
+                ><i class="bi bi-calendar3"></i> 2025 Archive</span
+              >
+            </div>
+          </div>
+
+          <!-- NIES 2024 -->
+          <div
+            id="nies-2024"
+            class="col-md-6 col-lg-4 gallery-item"
+            data-category="nies"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <img src="img/Gallery/NIES 2024.jpg" alt="NIES 2024" />
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-icon">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5>N.I.E.S 2024</h5>
+              <p>Nigeria International Energy Summit</p>
+              <span class="event-date"
+                ><i class="bi bi-calendar3"></i> 2024 Archive</span
+              >
+            </div>
+          </div>
+
+          <!-- GRC Workshop 2024 -->
+          <div
+            id="grc-workshop-2024"
+            class="col-md-6 col-lg-4 gallery-item"
+            data-category="other"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <img
+              src="img/Gallery/GRC_Workshop_2024.jpg"
+              alt="GRC Workshop 2024"
+            />
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-icon">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5>GRC Workshop 2024</h5>
+              <p>Governance, Risk & Compliance Workshop</p>
+              <span class="event-date"
+                ><i class="bi bi-calendar3"></i> 2024 Workshop Archive</span
+              >
+            </div>
+          </div>
+
+          <!-- NIES 2023 -->
+          <div
+            id="nies-2023"
+            class="col-md-6 col-lg-4 gallery-item"
+            data-category="nies"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <img src="img/Gallery/NIES 2023.jpg" alt="NIES 2023" />
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-icon">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5>N.I.E.S 2023</h5>
+              <p>Nigeria International Energy Summit</p>
+              <span class="event-date"
+                ><i class="bi bi-calendar3"></i> 2023 Archive</span
+              >
+            </div>
+          </div>
+
+          <!-- NIES 2022 -->
+          <div
+            id="nies-2022"
+            class="col-md-6 col-lg-4 gallery-item"
+            data-category="nies"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <img src="img/Gallery/NIES 2022.jpg" alt="NIES 2022" />
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-icon">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5>N.I.E.S 2022</h5>
+              <p>Nigeria International Energy Summit</p>
+              <span class="event-date"
+                ><i class="bi bi-calendar3"></i> 2022 Archive</span
+              >
+            </div>
+          </div>
+
+          <!-- Decade of Gas -->
+          <div
+            id="decade-of-gas"
+            class="col-md-6 col-lg-4 gallery-item"
+            data-category="other"
+            data-aos="fade-up"
+            data-aos-delay="350"
+          >
+            <img
+              src="img/Gallery/Decade_of_Gas.jpg"
+              alt="Decade of Gas"
+            />
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-icon">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5>Decade of Gas</h5>
+              <p>Gas Industry Conference</p>
+              <span class="event-date"
+                ><i class="bi bi-calendar3"></i> Special Event Archive</span
+              >
+            </div>
+          </div>
+
+          <!-- NIPS 2021 -->
+          <div
+            id="nips-2021"
+            class="col-md-6 col-lg-4 gallery-item"
+            data-category="nips"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <img src="img/Gallery/NIPS_2021.jpg" alt="NIPS 2021" />
+            <div class="gallery-overlay">
+              <div class="gallery-overlay-icon">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5>N.I.P.S 2021</h5>
+              <p>Nigeria International Petroleum Summit</p>
+              <span class="event-date"
+                ><i class="bi bi-calendar3"></i> 2021 Archive</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Event Section -->
+    <section class="section-padding featured-event-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="section-header" data-aos="fade-up">
+              <span class="section-label">Upcoming Event</span>
+              <h2 class="section-title">
+                Digital Nigeria International Conference
+              </h2>
+              <p class="section-description">
+                Our upcoming event bringing together global energy leaders,
+                policymakers, and industry experts.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <div class="featured-event-card" data-aos="fade-up">
+              <div class="featured-event-image">
+                <img src="img/upcoming_event.png" alt="Upcoming event" />
+                <span class="featured-event-badge">Upcoming Event</span>
+              </div>
+              <div class="featured-event-content">
+                <h3>DNICE - Digital Nigeria International Conference</h3>
+                <p>
+                  Digital technologies are reshaping governance, commerce,
+                  security, and social development worldwide. In 2026, global
+                  trends such as AI at scale, cybersecurity automation, and
+                  trusted digital identity are foundational to national
+                  competitiveness.
+                </p>
+                <div class="featured-event-meta">
+                  <div class="featured-event-meta-item">
+                    <i class="bi bi-people"></i>
+                    <span>5,000+ Delegates</span>
+                  </div>
+                  <div class="featured-event-meta-item">
+                    <i class="bi bi-globe"></i>
+                    <span>10+ Countries</span>
+                  </div>
+                  <div class="featured-event-meta-item">
+                    <i class="bi bi-briefcase"></i>
+                    <span>200+ Exhibitors</span>
+                  </div>
+                </div>
+                <a
+                  href="https://digitalnigeria.gov.ng/"
+                  class="btn btn-primary-custom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Learn More About DNICE</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Stats Section -->
+    <section class="event-stats-section">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="event-stat-box">
+              <i class="bi bi-calendar-event"></i>
+              <h4 class="counter" data-target="50">0</h4>
+              <p>Events Produced</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="event-stat-box">
+              <i class="bi bi-people"></i>
+              <h4 class="counter" data-target="25">0</h4>
+              <p>Thousand Delegates</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="event-stat-box">
+              <i class="bi bi-globe"></i>
+              <h4 class="counter" data-target="80">0</h4>
+              <p>Countries Represented</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+            <div class="event-stat-box">
+              <i class="bi bi-diagram-3"></i>
+              <h4 class="counter" data-target="500">0</h4>
+              <p>Business Connections</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="section-padding video-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="section-header" data-aos="fade-up">
+              <span class="section-label">Experience Our Events</span>
+              <h2 class="section-title">Event Highlights</h2>
+              <p class="section-description">
+                Take a glimpse into the world-class events we produce and the
+                impact they create.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <div class="video-wrapper" data-aos="fade-up">
+              <img
+                src="https://img.youtube.com/vi/Q-_1UeTn8TQ/maxresdefault.jpg"
+                alt="Event highlights video preview"
+              />
+              <a
+                class="video-link"
+                href="https://www.youtube.com/watch?v=Q-_1UeTn8TQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Watch event highlights on YouTube"
+              >
+                <div class="video-play-btn">
+                  <i class="bi bi-play-fill"></i>
+                </div>
+              </a>
+              <div class="video-caption">
+                <span>Watch on YouTube</span>
+                <strong
+                  >Open the full event highlights video in YouTube for
+                  uninterrupted playback.</strong
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+            <div class="footer-widget">
+              <div class="footer-logo">
+                <img src="BREVITY_logo.png" alt="Brevity Anderson Logo" />
+                <span class="footer-logo-text"
+                  >Brevity<span>Anderson</span></span
+                >
+              </div>
+              <p>
+                A world-class trade advisory firm dedicated to empowering global
+                businesses to navigate international markets with confidence and
+                clarity.
+              </p>
+              <div class="footer-social">
+                <a href="#" aria-label="LinkedIn"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+                <a href="#" aria-label="Twitter"
+                  ><i class="bi bi-twitter-x"></i
+                ></a>
+                <a href="#" aria-label="Facebook"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="#" aria-label="Instagram"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+            <div class="footer-widget">
+              <h4>Quick Links</h4>
+              <ul class="footer-links">
+                <li>
+                  <a href="index.html"
+                    ><i class="bi bi-chevron-right"></i> Home</a
+                  >
+                </li>
+                <li>
+                  <a href="about-us.html"
+                    ><i class="bi bi-chevron-right"></i> About Us</a
+                  >
+                </li>
+                <li>
+                  <a href="services.html"
+                    ><i class="bi bi-chevron-right"></i> Services</a
+                  >
+                </li>
+                <li>
+                  <a href="clientele.html"
+                    ><i class="bi bi-chevron-right"></i> Clientele</a
+                  >
+                </li>
+                <li>
+                  <a href="contact.html"
+                    ><i class="bi bi-chevron-right"></i> Contact</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <div class="footer-widget">
+              <h4>Our Services</h4>
+              <ul class="footer-links">
+                <li>
+                  <a href="services.html"
+                    ><i class="bi bi-chevron-right"></i> Conferences &amp;
+                    Exhibitions</a
+                  >
+                </li>
+                <li>
+                  <a href="services.html"
+                    ><i class="bi bi-chevron-right"></i> Virtual and Hybrid
+                    Events</a
+                  >
+                </li>
+                <li>
+                  <a href="services.html"
+                    ><i class="bi bi-chevron-right"></i> Strategic High-Level
+                    Meetings</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-widget">
+              <h4>Contact Info</h4>
+              <ul class="footer-contact">
+                <li>
+                  <i class="bi bi-geo-alt"></i
+                  ><span
+                    >15 Stratton Street, Mayfair<br />London, W1J 8LQ, UK</span
+                  >
+                </li>
+                <li>
+                  <i class="bi bi-telephone"></i><span>+44 203 890 8574</span>
+                </li>
+                <li>
+                  <i class="bi bi-envelope"></i
+                  ><span>info@brevityanderson.com</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            Copyright 2026 - All Rights Reserved |
+            <a href="index.html">Brevity Anderson</a> |
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop">
+      <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        easing: "ease-out-cubic",
+        once: true,
+        offset: 100,
+      });
+
+      const backToTop = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 500) backToTop.classList.add("show");
+        else backToTop.classList.remove("show");
+      });
+      backToTop.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" }),
+      );
+
+      // Gallery filter
+      const filterButtons = document.querySelectorAll(".gallery-filter button");
+      const galleryItems = document.querySelectorAll(".gallery-item");
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          const filter = button.getAttribute("data-filter");
+
+          galleryItems.forEach((item) => {
+            if (
+              filter === "all" ||
+              item.getAttribute("data-category") === filter
+            ) {
+              item.style.display = "block";
+              setTimeout(() => {
+                item.style.opacity = "1";
+                item.style.transform = "scale(1)";
+              }, 10);
+            } else {
+              item.style.opacity = "0";
+              item.style.transform = "scale(0.8)";
+              setTimeout(() => {
+                item.style.display = "none";
+              }, 300);
+            }
+          });
+        });
+      });
+
+      // Counter animation
+      const counters = document.querySelectorAll(".counter");
+      const speed = 200;
+
+      const animateCounters = () => {
+        counters.forEach((counter) => {
+          const target = +counter.getAttribute("data-target");
+          const count = +counter.innerText;
+          const inc = target / speed;
+
+          if (count < target) {
+            counter.innerText = Math.ceil(count + inc);
+            setTimeout(animateCounters, 20);
+          } else {
+            counter.innerText = target + "+";
+          }
+        });
+      };
+
+      const counterSection = document.querySelector(".event-stats-section");
+      let counterTriggered = false;
+
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !counterTriggered) {
+              animateCounters();
+              counterTriggered = true;
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      counterObserver.observe(counterSection);
+    </script>
+  </body>
+</html>
