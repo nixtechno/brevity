@@ -8,8 +8,8 @@ class CmsDefaults
     {
         return [
             'site_name' => 'Brevity Anderson',
-            'logo_path' => asset('BREVITY_logo.png'),
-            'favicon_path' => asset('favicon.ico'),
+            'logo_path' => '/BREVITY_logo.png',
+            'favicon_path' => '/favicon.ico',
             'email' => 'info@brevityanderson.com',
             'phone' => '+44 203 890 8574',
             'address' => "15 Stratton Street, Mayfair\nLondon, W1J 8LQ, UK",
