@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover Brevity Anderson's esteemed clientele including governments, multinational corporations, and leading international brands.">
+    <title>{{ data_get($page, 'meta_title', data_get($page, 'title', data_get($settings, 'site_name', 'Brevity Anderson'))) }}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
+    <style>
+        /* Clientele Page Specific Styles */
+        .clients-intro-section {
+            background: var(--off-white);
+        }
+
+        .client-category-section {
+            background: var(--white);
+        }
+
+        .client-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--light-gray);
+            height: 100%;
+        }
+
+        .client-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(20, 59, 102, 0.12);
+            border-color: var(--accent-cyan);
+        }
+
+        .client-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, rgba(65, 196, 224, 0.1) 0%, rgba(89, 196, 192, 0.1) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            transition: var(--transition-smooth);
+        }
+
+        .client-card:hover .client-icon {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-light) 100%);
+        }
+
+        .client-icon i {
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            transition: var(--transition-smooth);
+        }
+
+        .client-card:hover .client-icon i {
+            color: var(--white);
+        }
+
+        .client-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary-navy);
+            margin-bottom: 10px;
+        }
+
+        .client-card p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--dark-navy) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(65, 196, 224, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            height: 100%;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 5rem;
+            color: var(--accent-cyan);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid var(--accent-cyan);
+        }
+
+        .testimonial-author-info h5 {
+            font-size: 1.1rem;
+            color: var(--white);
+            margin-bottom: 3px;
+        }
+
+        .testimonial-author-info p {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin: 0;
+        }
+
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            margin: 0 5px;
+            border: none;
+        }
+
+        .carousel-indicators button.active {
+            background-color: var(--accent-cyan);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--accent-cyan);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .stat-box {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-box h3 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .stat-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        /* Partners Section */
+        .partners-section {
+            background: var(--off-white);
+        }
+
+        .logo-showcase-intro {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .partner-logo-wrapper {
+            position: relative;
+            background:
+                radial-gradient(circle at top, rgba(65, 196, 224, 0.12), rgba(255, 255, 255, 0.96) 52%),
+                var(--white);
+            border-radius: 18px;
+            padding: 30px 24px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            border: 1px solid rgba(20, 59, 102, 0.08);
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 18px 40px rgba(20, 59, 102, 0.06);
+        }
+
+        .partner-logo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(65, 196, 224, 0.08), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .partner-logo-wrapper:hover {
+            box-shadow: 0 24px 55px rgba(20, 59, 102, 0.12);
+            transform: translateY(-8px);
+            border-color: rgba(65, 196, 224, 0.4);
+        }
+
+        .partner-logo-wrapper:hover::before {
+            opacity: 1;
+        }
+
+        .partner-logo {
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+            max-height: 72px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: none;
+            opacity: 1;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+        }
+
+        .partner-logo-wrapper:hover .partner-logo {
+            opacity: 1;
+            transform: scale(1.16);
+        }
+
+        @media (max-width: 991.98px) {
+            .stat-box h3 {
+                font-size: 2.5rem;
+            }
+
+            .logo-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .stat-box {
+                margin-bottom: 30px;
+            }
+
+            .testimonial-card {
+                padding: 30px 25px;
+            }
+
+            .logo-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+            }
+
+            .partner-logo-wrapper {
+                min-height: 120px;
+                padding: 22px 18px;
+            }
+
+            .partner-logo {
+                max-height: 56px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top scrolled" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ data_get($settings, 'logo_path', asset('BREVITY_logo.png')) }}" alt="Brevity Anderson Logo">
+                <span class="navbar-brand-text">Brevity<span>Anderson</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('services') }}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('clientele') }}">Clientele</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="page-header-content" data-aos="fade-up">
+                <h1 class="page-header-title">Our Clientele</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Our Clientele</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Clients Intro Section -->
+    <section class="section-padding clients-intro-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-label">Trusted Partners</span>
+                        <h2 class="section-title">Our Clients Include Governments and Top International Brands</h2>
+                        <p class="section-description">
+                            We measure our success by our clients' success. Our portfolio includes prestigious government bodies, multinational corporations, and leading brands across multiple industries.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Government Clients Section -->
+    <section class="section-padding client-category-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h3 class="text-center mb-5" data-aos="fade-up">Government Partners</h3>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="client-card">
+                        <div class="client-icon">
+                            <i class="bi bi-building-fill"></i>
+                        </div>
+                        <h4>Federal Republic of Nigeria</h4>
+                        <p>Strategic trade advisory and event production for government initiatives</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="client-card">
+                        <div class="client-icon">
+                            <i class="bi bi-bank"></i>
+                        </div>
+                        <h4>Department for International Trade - UK</h4>
+                        <p>Supporting UK trade missions and international business development</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="client-card">
+                        <div class="client-icon">
+                            <i class="bi bi-fuel-pump-fill"></i>
+                        </div>
+                        <h4>NNPC - Nigeria</h4>
+                        <p>Energy sector advisory and international petroleum summits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Clients Section -->
+    <section class="section-padding bg-off-white">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h3 class="text-center mb-5" data-aos="fade-up">Corporate Partners</h3>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="client-card">
+                        <div class="client-icon">
+                            <i class="bi bi-globe-americas"></i>
+                        </div>
+                        <h4>Global Energy Partners</h4>
+                        <p>International energy corporations</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                    <div class="client-card">
+                        <div class="client-icon">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h4>Multinational Corporations</h4>
+                        <p>Fortune 500 companies</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="client-card">
+                        <div class="client-icon">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+                        <h4>Investment Firms</h4>
+                        <p>Private equity and venture capital</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="250">
+                    <div class="client-card">
+                        <div class="client-icon">
+                            <i class="bi bi-lightning"></i>
+                        </div>
+                        <h4>Energy Companies</h4>
+                        <p>Oil, gas & renewable energy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section-padding testimonials-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-label">Testimonials</span>
+                        <h2 class="section-title section-title-white">What Our Clients Say</h2>
+                        <p class="section-description" style="color: rgba(255,255,255,0.7);">
+                            We measure our success by our clients' success. Here's what they have to say about working with us.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up" data-aos-delay="200">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="testimonial-card">
+                                            <p class="testimonial-text">
+                                                It is with great pleasure that I address you on this third edition of the Nigeria International Petroleum Summit (NIPS). Brevity Anderson has consistently demonstrated excellence in organizing world-class events that bring together industry leaders and facilitate meaningful partnerships.
+                                            </p>
+                                            <div class="testimonial-author">
+                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="President Muhammadu Buhari" class="testimonial-author-img">
+                                                <div class="testimonial-author-info">
+                                                    <h5>President Muhammadu Buhari</h5>
+                                                    <p>President, Federal Republic of Nigeria</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="testimonial-card">
+                                            <p class="testimonial-text">
+                                                On behalf of the entire Department for International Trade in Nigeria, we are writing to thank you for the quality of service provided by your company. We sincerely appreciate your support and the level of professionalism demonstrated throughout our partnership.
+                                            </p>
+                                            <div class="testimonial-author">
+                                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Oyelami Adekola" class="testimonial-author-img">
+                                                <div class="testimonial-author-info">
+                                                    <h5>Oyelami Adekola</h5>
+                                                    <p>Director, DIT Nigeria</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="testimonial-card">
+                                            <p class="testimonial-text">
+                                                Brevity Anderson's expertise in trade facilitation has been instrumental in helping us navigate complex international markets. Their strategic insights and dedicated support have significantly contributed to our expansion success.
+                                            </p>
+                                            <div class="testimonial-author">
+                                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="testimonial-author-img">
+                                                <div class="testimonial-author-info">
+                                                    <h5>James Morrison</h5>
+                                                    <p>CEO, Global Energy Partners</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="testimonial-card">
+                                            <p class="testimonial-text">
+                                                The level of professionalism and attention to detail Brevity Anderson brings to every event is exceptional. They have become our trusted partner for all high-level business gatherings and conferences.
+                                            </p>
+                                            <div class="testimonial-author">
+                                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="testimonial-author-img">
+                                                <div class="testimonial-author-info">
+                                                    <h5>Sarah Chen</h5>
+                                                    <p>Director, International Trade Corp</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="50">0</h3>
+                        <p>Global Partners</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="20">0</h3>
+                        <p>Government Clients</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="100">0</h3>
+                        <p>Corporate Clients</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="5">0</h3>
+                        <p>Continents Covered</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="section-padding partners-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-label">Strategic Alliances</span>
+                        <h2 class="section-title">Our Client Network</h2>
+                        <p class="section-description logo-showcase-intro">
+                            Our clientele spans government institutions, international agencies, energy leaders, and globally recognized brands. Each relationship reflects the trust placed in our strategic delivery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="logo-grid">
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="50"><img src="{{ asset('img/clientele/apple-logo.png') }}" alt="Apple logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="70"><img src="{{ asset('img/clientele/APPO-logo_200x200.jpg') }}" alt="APPO logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="90"><img src="{{ asset('img/clientele/CBWN-LOGO_200x200.png') }}" alt="CBWN logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="110"><img src="{{ asset('img/clientele/chevron1_200x200.png') }}" alt="Chevron logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="130"><img src="{{ asset('img/clientele/Coat-of-arms_200x200.png') }}" alt="Coat of arms logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="150"><img src="{{ asset('img/clientele/cordros.png') }}" alt="Cordros logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="170"><img src="{{ asset('img/clientele/Dangote_200x200.png') }}" alt="Dangote logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="190"><img src="{{ asset('img/clientele/DIT2.png') }}" alt="Department for International Trade logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="210"><img src="{{ asset('img/clientele/DPR_200x200.png') }}" alt="DPR logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="230"><img src="{{ asset('img/clientele/eni1_200x200.jpg') }}" alt="Eni logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="250"><img src="{{ asset('img/clientele/exonmobil_200x200.png') }}" alt="ExxonMobil logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="270"><img src="{{ asset('img/clientele/GIZ.jpg') }}" alt="GIZ logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="290"><img src="{{ asset('img/clientele/huawei.png') }}" alt="Huawei logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="310"><img src="{{ asset('img/clientele/icrc.png') }}" alt="ICRC logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="330"><img src="{{ asset('img/clientele/lekoil_200x200.jpg') }}" alt="Lekoil logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="350"><img src="{{ asset('img/clientele/Logo_USTDA_color_200X200.png') }}" alt="USTDA logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="370"><img src="{{ asset('img/clientele/NCDMB_V1_200x200.jpg') }}" alt="NCDMB logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="390"><img src="{{ asset('img/clientele/nlcga.png') }}" alt="NLCGA logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="410"><img src="{{ asset('img/clientele/NLNG.png') }}" alt="NLNG logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="430"><img src="{{ asset('img/clientele/nmdpra.png') }}" alt="NMDPRA logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="450"><img src="{{ asset('img/clientele/NNPC-LOGO.png') }}" alt="NNPC logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="470"><img src="{{ asset('img/clientele/nuprc.png') }}" alt="NUPRC logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="490"><img src="{{ asset('img/clientele/oilgas-freezone1_200x200.png') }}" alt="Oil and Gas Free Zones Authority logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="510"><img src="{{ asset('img/clientele/Ondo.png') }}" alt="Ondo State logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="530"><img src="{{ asset('img/clientele/opec-logo_200x200.jpg') }}" alt="OPEC logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="550"><img src="{{ asset('img/clientele/ovh_200x200.png') }}" alt="OVH Energy logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="570"><img src="{{ asset('img/clientele/shell_200x200.png') }}" alt="Shell logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="590"><img src="{{ asset('img/clientele/technoil.png') }}" alt="Techno Oil logo" class="partner-logo"></div>
+                <div class="partner-logo-wrapper" data-aos="fade-up" data-aos-delay="610"><img src="{{ asset('img/clientele/Total-Energies.png') }}" alt="TotalEnergies logo" class="partner-logo"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <img src="{{ data_get($settings, 'logo_path', asset('BREVITY_logo.png')) }}" alt="Brevity Anderson Logo">
+                            <span class="footer-logo-text">Brevity<span>Anderson</span></span>
+                        </div>
+                        <p>A world-class trade advisory firm dedicated to empowering global businesses to navigate international markets with confidence and clarity.</p>
+                        <div class="footer-social">
+                            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="{{ route('home') }}"><i class="bi bi-chevron-right"></i> Home</a></li>
+                            <li><a href="{{ route('about') }}"><i class="bi bi-chevron-right"></i> About Us</a></li>
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Services</a></li>
+                            <li><a href="{{ route('clientele') }}"><i class="bi bi-chevron-right"></i> Clientele</a></li>
+                            <li><a href="{{ route('contact') }}"><i class="bi bi-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4>Our Services</h4>
+                        <ul class="footer-links">
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Conferences &amp; Exhibitions</a></li>
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Virtual and Hybrid Events</a></li>
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Strategic High-Level Meetings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4>Contact Info</h4>
+                        <ul class="footer-contact">
+                            <li><i class="bi bi-geo-alt"></i><span>15 Stratton Street, Mayfair<br>London, W1J 8LQ, UK</span></li>
+                            <li><i class="bi bi-telephone"></i><span>+44 203 890 8574</span></li>
+                            <li><i class="bi bi-envelope"></i><span>info@brevityanderson.com</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright 2026 - All Rights Reserved | <a href="{{ route('home') }}">Brevity Anderson</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @include('site.partials.cms-bootstrap')
+
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 100 });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(animateCounters, 20);
+                } else {
+                    counter.innerText = target + '+';
+                }
+            });
+        };
+
+        const counterSection = document.querySelector('.stats-section');
+        let counterTriggered = false;
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterTriggered) {
+                    animateCounters();
+                    counterTriggered = true;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counterObserver.observe(counterSection);
+    </script>
+</body>
+</html>
+
+
+
+
+
+

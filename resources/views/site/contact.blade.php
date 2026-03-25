@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Brevity Anderson for trade advisory services, event production, and international business consulting. Visit our Mayfair, London office.">
+    <title>{{ data_get($page, 'meta_title', data_get($page, 'title', data_get($settings, 'site_name', 'Brevity Anderson'))) }}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-info-section {
+            background: var(--off-white);
+        }
+
+        .contact-info-card {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--dark-navy) 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+            height: 100%;
+            color: var(--white);
+        }
+
+        .contact-info-card h3 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info-card > p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(65, 196, 224, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-info-icon i {
+            color: var(--accent-cyan);
+            font-size: 1.3rem;
+        }
+
+        .contact-info-content h5 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-info-content p,
+        .contact-info-content a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .contact-info-content a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .contact-social {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-social h5 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+
+        .social-links a i {
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        .contact-form-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(20, 59, 102, 0.08);
+            height: 100%;
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 1.8rem;
+            color: var(--primary-navy);
+            margin-bottom: 10px;
+        }
+
+        .contact-form-wrapper > p {
+            color: var(--medium-gray);
+            margin-bottom: 35px;
+        }
+
+        .form-floating > .form-control,
+        .form-floating > .form-select {
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            height: 60px;
+        }
+
+        .form-floating > textarea.form-control {
+            height: 150px;
+        }
+
+        .form-floating > .form-control:focus,
+        .form-floating > .form-select:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 0.25rem rgba(65, 196, 224, 0.25);
+        }
+
+        .form-floating > label {
+            color: var(--medium-gray);
+            padding-left: 15px;
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label,
+        .form-floating > .form-select ~ label {
+            color: var(--accent-cyan);
+        }
+
+        /* Office Location Section */
+        .office-section {
+            position: relative;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .office-section::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -100px;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(65, 196, 224, 0.14), transparent 70%);
+            animation: officeAura 10s ease-in-out infinite;
+        }
+
+        .office-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(20, 59, 102, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(20, 59, 102, 0.03) 1px, transparent 1px);
+            background-size: 88px 88px;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .office-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .office-card {
+            position: relative;
+            background: var(--off-white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            box-shadow: 0 18px 40px rgba(20, 59, 102, 0.06);
+        }
+
+        .office-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.3) 50%, transparent 80%);
+            transform: translateX(-120%);
+            transition: transform 0.9s ease;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .office-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(20, 59, 102, 0.12);
+        }
+
+        .office-card:hover::before {
+            transform: translateX(120%);
+        }
+
+        .office-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .office-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+        }
+
+        .office-card:hover .office-image img {
+            transform: scale(1.08);
+        }
+
+        .office-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(20, 59, 102, 0.08) 0%, rgba(20, 59, 102, 0.32) 100%);
+            pointer-events: none;
+        }
+
+        .office-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--accent-cyan);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 12px 24px rgba(65, 196, 224, 0.22);
+            animation: officeBadgeFloat 4.8s ease-in-out infinite;
+        }
+
+        .office-content {
+            padding: 30px;
+        }
+
+        .office-content h4 {
+            font-size: 1.3rem;
+            color: var(--primary-navy);
+            margin-bottom: 15px;
+        }
+
+        .office-content p {
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .office-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .office-details li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .office-details li i {
+            color: var(--accent-cyan);
+            margin-right: 12px;
+            font-size: 1rem;
+        }
+
+        @keyframes officeAura {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            50% {
+                transform: translate3d(-18px, 18px, 0) scale(1.08);
+            }
+        }
+
+        @keyframes officeBadgeFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* Map Section */
+        .map-section {
+            background: var(--off-white);
+        }
+
+        .map-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(20, 59, 102, 0.1);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--white);
+        }
+
+        .accordion-item {
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            padding: 25px 30px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--primary-navy);
+            background: var(--white);
+            border: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--off-white);
+            color: var(--primary-navy);
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23143b66'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2341c4e0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .accordion-body {
+            padding: 0 30px 25px;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .contact-cta-section {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-dark) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .contact-cta-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .contact-cta-content h2 {
+            color: var(--white);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-cta-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .contact-cta-btn {
+            background: var(--white);
+            color: var(--primary-navy);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            padding: 16px 40px;
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        .contact-cta-btn:hover {
+            background: var(--primary-navy);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 991.98px) {
+            .contact-info-card,
+            .contact-form-wrapper {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .contact-info-card,
+            .contact-form-wrapper {
+                padding: 35px 25px;
+            }
+
+            .contact-info-item {
+                gap: 14px;
+            }
+
+            .contact-info-icon {
+                width: 48px;
+                height: 48px;
+                margin-right: 0;
+            }
+
+            .office-content {
+                padding: 24px 20px;
+            }
+
+            .office-badge {
+                top: 14px;
+                left: 14px;
+                padding: 7px 14px;
+                font-size: 0.68rem;
+                letter-spacing: 1.2px;
+            }
+
+            .office-details li {
+                align-items: flex-start;
+                font-size: 0.9rem;
+            }
+
+            .office-image img {
+                height: 220px;
+            }
+
+            .map-wrapper iframe {
+                height: 300px;
+            }
+
+            .contact-cta-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top scrolled" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ data_get($settings, 'logo_path', asset('BREVITY_logo.png')) }}" alt="Brevity Anderson Logo">
+                <span class="navbar-brand-text">Brevity<span>Anderson</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('services') }}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('clientele') }}">Clientele</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="page-header-content" data-aos="fade-up">
+                <h1 class="page-header-title">Contact Us</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact Info & Form Section -->
+    <section class="section-padding contact-info-section">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Contact Info -->
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="contact-info-card">
+                        <h3>Get in Touch</h3>
+                        <p>Have a question or want to discuss your project? We'd love to hear from you.</p>
+                        
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h5>Office Location</h5>
+                                <p>15 Stratton Street, Mayfair<br>London, W1J 8LQ, United Kingdom</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h5>Phone</h5>
+                                <a href="tel:+442038908574">+44 203 890 8574</a><br>
+                                <a href="tel:+442031720839">Fax: +44 203 172 0839</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h5>Email</h5>
+                                <a href="mailto:info@brevityanderson.com">info@brevityanderson.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div class="contact-info-content">
+                                <h5>Business Hours</h5>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM GMT</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-social">
+                            <h5>Follow Us</h5>
+                            <div class="social-links">
+                                <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="contact-form-wrapper">
+                        <h3>Send Us a Message</h3>
+                        <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                        <form id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                                        <label for="firstName">First Name *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                                        <label for="lastName">Last Name *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+                                        <label for="email">Email Address *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="tel" class="form-control" id="phone" placeholder="Phone Number">
+                                        <label for="phone">Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="company" placeholder="Company/Organization">
+                                        <label for="company">Company/Organization</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="hearAbout">
+                                            <option selected disabled value="">Select an option</option>
+                                            <option value="website">Our Website</option>
+                                            <option value="wordofmouth">Word of Mouth</option>
+                                            <option value="event">Attended our Event</option>
+                                            <option value="google">Google Search</option>
+                                            <option value="social">Social Media</option>
+                                            <option value="linkedin">LinkedIn</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <label for="hearAbout">How did you hear about us?</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="serviceInterest">
+                                            <option selected disabled value="">Select a service</option>
+                                            <option value="conferences">Conferences &amp; Exhibitions</option>
+                                            <option value="virtual-hybrid">Virtual and Hybrid Events</option>
+                                            <option value="strategic-meetings">Strategic High-Level Meetings</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <label for="serviceInterest">Service of Interest</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating mb-4">
+                                        <textarea class="form-control" id="message" placeholder="Your Message" style="height: 150px;" required></textarea>
+                                        <label for="message">Your Message *</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary-custom w-100">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Location Section -->
+    <section class="section-padding office-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-label">Our Locations</span>
+                        <h2 class="section-title">Visit Our Office</h2>
+                        <p class="section-description">
+                            Our headquarters in Mayfair, London serves as the hub for our global operations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="office-card">
+                        <div class="office-image">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="London Office">
+                            <span class="office-badge">Headquarters</span>
+                        </div>
+                        <div class="office-content">
+                            <h4>London Office</h4>
+                            <p>Our headquarters in the heart of Mayfair, London.</p>
+                            <ul class="office-details">
+                                <li><i class="bi bi-geo-alt"></i> 15 Stratton Street, Mayfair, London W1J 8LQ</li>
+                                <li><i class="bi bi-telephone"></i> +44 203 890 8574</li>
+                                <li><i class="bi bi-envelope"></i> info@brevityanderson.com</li>
+                                <li><i class="bi bi-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM GMT</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="office-card">
+                        <div class="office-image">
+                            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/The%20City%20Gate%20of%20Abuja.jpg" alt="Abuja City Gate">
+                            <span class="office-badge">Abuja Office</span>
+                        </div>
+                        <div class="office-content">
+                            <h4>Abuja Office</h4>
+                            <p>Our Nigerian office in the Capital City of Abuja.</p>
+                            <ul class="office-details">
+                                <li><i class="bi bi-geo-alt"></i> #4 Masuku Close, Durban Street, Ademola Adetokunbo, Wuse II, Abuja</li>
+                                <li><i class="bi bi-telephone"></i> 08036145143</li>
+                                <li><i class="bi bi-envelope"></i> info@brevityanderson.com</li>
+                                <li><i class="bi bi-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM GMT</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="section-padding map-section">
+        <div class="container">
+            <div class="map-wrapper" data-aos="fade-up">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.680563425751!2d-0.144058684231338!3d51.50733597963542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760529d7fc73d7%3A0x49f4ae0c90bc9f5!2sStratton%20St%2C%20London%20W1J%2C%20UK!5e0!3m2!1sen!2sus!4v1635959567000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section-padding faq-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-header" data-aos="fade-up">
+                        <span class="section-label">FAQ</span>
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <p class="section-description">
+                            Find answers to common questions about our services and how we can help you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="accordion" id="faqAccordion" data-aos="fade-up">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    What services does Brevity Anderson offer?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Brevity Anderson provides three core event services: Conferences &amp; Exhibitions, Virtual and Hybrid Events, and Strategic High-Level Meetings. Across each offering, we deliver the planning, production, and execution standards required for high-value engagements.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How can I engage Brevity Anderson for my project?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    You can engage us by filling out the contact form on this page, calling our office at +44 203 890 8574, or sending an email to info@brevityanderson.com. Our team will get back to you within 24-48 hours to discuss your requirements.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    What industries do you specialize in?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    While we work across multiple industries, our particular expertise lies in the Oil, Gas, and Energy sectors. We also have extensive experience in finance, infrastructure, logistics, technology, healthcare, and retail sectors.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Do you work with government organizations?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we work extensively with government organizations and senior stakeholders, supporting conferences, executive forums, strategic meetings, and hybrid engagements that require strong coordination, discretion, and world-class delivery.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    What is your global presence?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our headquarters is located in Mayfair, London, and we have footprints on five continents including Europe, Africa, the Americas, Asia, and the Middle East. This global presence allows us to serve clients effectively across international markets.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="contact-cta-section">
+        <div class="container">
+            <div class="contact-cta-content" data-aos="zoom-in">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Let's discuss how Brevity Anderson can help you achieve your strategic objectives in international markets.</p>
+                <a href="tel:+442038908574" class="contact-cta-btn"><i class="bi bi-telephone"></i> Call Us Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <img src="{{ data_get($settings, 'logo_path', asset('BREVITY_logo.png')) }}" alt="Brevity Anderson Logo">
+                            <span class="footer-logo-text">Brevity<span>Anderson</span></span>
+                        </div>
+                        <p>A world-class trade advisory firm dedicated to empowering global businesses to navigate international markets with confidence and clarity.</p>
+                        <div class="footer-social">
+                            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="{{ route('home') }}"><i class="bi bi-chevron-right"></i> Home</a></li>
+                            <li><a href="{{ route('about') }}"><i class="bi bi-chevron-right"></i> About Us</a></li>
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Services</a></li>
+                            <li><a href="{{ route('clientele') }}"><i class="bi bi-chevron-right"></i> Clientele</a></li>
+                            <li><a href="{{ route('contact') }}"><i class="bi bi-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4>Our Services</h4>
+                        <ul class="footer-links">
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Conferences &amp; Exhibitions</a></li>
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Virtual and Hybrid Events</a></li>
+                            <li><a href="{{ route('services') }}"><i class="bi bi-chevron-right"></i> Strategic High-Level Meetings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4>Contact Info</h4>
+                        <ul class="footer-contact">
+                            <li><i class="bi bi-geo-alt"></i><span>15 Stratton Street, Mayfair<br>London, W1J 8LQ, UK</span></li>
+                            <li><i class="bi bi-telephone"></i><span>+44 203 890 8574</span></li>
+                            <li><i class="bi bi-envelope"></i><span>info@brevityanderson.com</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright 2026 - All Rights Reserved | <a href="{{ route('home') }}">Brevity Anderson</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @include('site.partials.cms-bootstrap')
+
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 100 });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you within 24-48 hours.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
