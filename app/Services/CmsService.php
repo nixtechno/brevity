@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Page;
 use App\Models\Section;
 use App\Models\Setting;
-use App\Support\AssetPath;
 use App\Support\CmsDefaults;
 use Illuminate\Support\Arr;
 
@@ -13,18 +12,7 @@ class CmsService
 {
     public function settings(): array
     {
-        $settings = array_replace_recursive(CmsDefaults::settings(), Setting::pairs());
-
-        $settings['logo_path'] = AssetPath::resolve(
-            data_get($settings, 'logo_path'),
-            'BREVITY_logo.png'
-        );
-        $settings['favicon_path'] = AssetPath::resolve(
-            data_get($settings, 'favicon_path'),
-            'favicon.ico'
-        );
-
-        return $settings;
+        return array_replace_recursive(CmsDefaults::settings(), Setting::pairs());
     }
 
     public function page(string $key): array

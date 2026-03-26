@@ -104,7 +104,7 @@
         color: var(--accent-cyan);
         padding: 10px 25px;
         border-radius: 30px;
-        font-family: var(--font-heading);
+        font-family: "Open Sans", sans-serif;
         font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
@@ -260,12 +260,12 @@
       .about-content h3 {
         font-size: 2.2rem;
         color: var(--primary-navy);
-        margin-bottom: 20px;
+        margin-bottom: 16px;
       }
 
       .about-content p {
         color: var(--text-color);
-        margin-bottom: 20px;
+        margin-bottom: 16px;
       }
 
       @keyframes aboutWatermarkFloat {
@@ -281,7 +281,7 @@
       /* Strategic Advisory Section */
       .strategic-advisory-section {
         position: relative;
-        padding: 80px 0;
+        padding: 62px 0;
         background:
           radial-gradient(
             circle at 15% 20%,
@@ -316,68 +316,87 @@
 
       .strategic-frame {
         position: relative;
-        border: 2px solid rgba(255, 255, 255, 0.55);
         min-height: 320px;
         display: flex;
         align-items: center;
-        padding: 44px 38px;
-        background: linear-gradient(
-          160deg,
-          rgba(20, 59, 102, 0.68) 0%,
-          rgba(26, 74, 122, 0.5) 100%
-        );
+        padding: 42px 36px;
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.48);
+        overflow: visible;
       }
 
-      .strategic-frame::before {
-        content: "";
-        position: absolute;
-        top: -16px;
-        left: -16px;
-        right: 44px;
-        height: 16px;
-        border-top: 4px solid rgba(255, 255, 255, 0.86);
-        border-left: 4px solid rgba(255, 255, 255, 0.86);
-      }
-
+      .strategic-frame::before,
       .strategic-frame::after {
         content: "";
         position: absolute;
-        bottom: -16px;
-        right: -16px;
-        left: 44px;
-        height: 16px;
-        border-bottom: 4px solid rgba(255, 255, 255, 0.86);
-        border-right: 4px solid rgba(255, 255, 255, 0.86);
+        height: 4px;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .strategic-frame::before {
+        top: -18px;
+        left: -18px;
+        width: 74%;
+      }
+
+      .strategic-frame::after {
+        right: -18px;
+        bottom: -18px;
+        width: 74%;
+      }
+
+      .strategic-frame-bend {
+        position: absolute;
+        width: 4px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .strategic-frame-bend-top {
+        left: -18px;
+        top: -18px;
+      }
+
+      .strategic-frame-bend-bottom {
+        right: -18px;
+        bottom: -18px;
+      }
+
+      .strategic-content {
+        position: relative;
+        z-index: 2;
+        max-width: 330px;
+        padding-left: 2px;
       }
 
       .strategic-kicker {
         display: block;
-        color: rgba(255, 255, 255, 0.9);
-        letter-spacing: 6px;
+        color: rgba(255, 255, 255, 0.92);
+        letter-spacing: 8px;
         text-transform: uppercase;
-        font-size: 0.85rem;
-        margin-bottom: 14px;
+        font-size: 0.82rem;
+        margin-bottom: 16px;
       }
 
       .strategic-title {
         margin: 0;
         color: var(--white);
         text-transform: uppercase;
-        letter-spacing: 1px;
-        line-height: 1.1;
-        font-size: clamp(1.65rem, 3vw, 2.7rem);
+        letter-spacing: 0.5px;
+        line-height: 1.02;
+        font-size: clamp(2.6rem, 4.5vw, 3.8rem);
       }
 
       .strategic-title strong {
         display: block;
-        margin-top: 10px;
+        margin-top: 12px;
         color: #4ea3ff;
         font-weight: 800;
       }
 
       .strategic-copy {
         position: relative;
-        padding-left: 34px;
+        padding-left: 30px;
       }
 
       .strategic-copy::before {
@@ -386,7 +405,7 @@
         left: 0;
         top: 8px;
         bottom: 8px;
-        width: 2px;
+        width: 3px;
         background: linear-gradient(
           180deg,
           rgba(65, 196, 224, 0.08) 0%,
@@ -399,10 +418,10 @@
         margin: 0;
         color: rgba(255, 255, 255, 0.95);
         text-transform: uppercase;
-        letter-spacing: 2.2px;
+        letter-spacing: 1.8px;
         line-height: 1.55;
-        font-size: 1.12rem;
-        font-family: var(--font-heading);
+        font-size: 1.02rem;
+        font-family: "Open Sans", sans-serif;
         font-weight: 700;
       }
 
@@ -433,77 +452,412 @@
       .services-preview-section {
         background: var(--white);
       }
+      .upcoming-events-section {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 12% 18%, rgba(65, 196, 224, 0.16) 0%, rgba(65, 196, 224, 0) 30%),
+          radial-gradient(circle at 88% 20%, rgba(78, 163, 255, 0.16) 0%, rgba(78, 163, 255, 0) 26%),
+          linear-gradient(135deg, #0f2743 0%, #143b66 52%, #0a1d33 100%);
+      }
+
+      .upcoming-events-section::before,
+      .upcoming-events-section::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .upcoming-events-section::before {
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 120px 120px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 85%);
+        animation: upcomingGridDrift 20s linear infinite;
+      }
+
+      .upcoming-events-section::after {
+        background: radial-gradient(circle at center, rgba(115, 195, 255, 0.18) 0%, rgba(115, 195, 255, 0) 58%);
+        transform: translate3d(16%, -10%, 0) scale(1.15);
+        opacity: 0.7;
+        animation: upcomingAmbientGlow 14s ease-in-out infinite;
+      }
+
+      .upcoming-events-motion {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .upcoming-events-beam,
+      .upcoming-events-ribbon,
+      .upcoming-events-orbit {
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .upcoming-events-beam {
+        top: -35%;
+        bottom: -35%;
+        width: 34%;
+        background: linear-gradient(180deg, rgba(115, 195, 255, 0.28), rgba(115, 195, 255, 0));
+        filter: blur(14px);
+        opacity: 0.42;
+        transform: rotate(16deg);
+      }
+
+      .upcoming-events-beam-1 {
+        left: -4%;
+        animation: upcomingBeamSweepA 12s ease-in-out infinite;
+      }
+
+      .upcoming-events-beam-2 {
+        right: 8%;
+        width: 26%;
+        opacity: 0.32;
+        animation: upcomingBeamSweepB 15s ease-in-out infinite;
+      }
+
+      .upcoming-events-ribbon {
+        left: -12%;
+        right: -12%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(115, 195, 255, 0), rgba(115, 195, 255, 0.88), rgba(255, 255, 255, 0), rgba(115, 195, 255, 0));
+        box-shadow: 0 0 20px rgba(115, 195, 255, 0.2);
+        opacity: 0.78;
+      }
+
+      .upcoming-events-ribbon-1 {
+        top: 32%;
+        animation: upcomingRibbonSweepA 8s ease-in-out infinite;
+      }
+
+      .upcoming-events-ribbon-2 {
+        top: 68%;
+        animation: upcomingRibbonSweepB 9.5s ease-in-out infinite;
+      }
+
+      .upcoming-events-orbit {
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        border: 1px solid rgba(115, 195, 255, 0.14);
+        box-shadow: inset 0 0 0 28px rgba(255, 255, 255, 0.02), 0 0 80px rgba(115, 195, 255, 0.08);
+        right: -90px;
+        bottom: -180px;
+        animation: upcomingOrbitRotate 18s linear infinite;
+      }
+
+      .upcoming-events-section .section-label {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .upcoming-events-section .section-title {
+        color: var(--white);
+      }
+
+      .upcoming-events-section .section-description {
+        color: rgba(255, 255, 255, 0.74);
+      }
+
+      .upcoming-events-section .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .event-card {
+        position: relative;
+        height: 100%;
+        padding: 14px;
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.06) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 18px 60px rgba(4, 12, 24, 0.22);
+        backdrop-filter: blur(10px);
+        transition: var(--transition-smooth);
+        overflow: hidden;
+        animation: upcomingCardFloat 7s ease-in-out infinite;
+      }
+
+      .upcoming-events-section .col-md-6:nth-child(2) .event-card {
+        animation-delay: 0.6s;
+      }
+
+      .upcoming-events-section .col-md-6:nth-child(3) .event-card {
+        animation-delay: 1.2s;
+      }
+
+      .upcoming-events-section .col-md-6:nth-child(4) .event-card {
+        animation-delay: 1.8s;
+      }
+
+      .event-card::before {
+        content: "";
+        position: absolute;
+        inset: -35% auto -35% -18%;
+        width: 42%;
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0), rgba(143, 223, 255, 0.22), rgba(255, 255, 255, 0));
+        transform: rotate(18deg);
+        filter: blur(6px);
+        opacity: 0.7;
+        animation: upcomingCardShimmer 9s ease-in-out infinite;
+      }
+
+      .event-card:hover {
+        transform: translateY(-10px) scale(1.01);
+        border-color: rgba(78, 163, 255, 0.28);
+        box-shadow: 0 24px 72px rgba(4, 12, 24, 0.3);
+      }
+
+      .event-card-media {
+        display: block;
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(7, 22, 39, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .event-card-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(5, 13, 24, 0.24));
+        pointer-events: none;
+      }
+
+      .event-card-media img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.8s ease;
+      }
+
+      .event-card:hover .event-card-media img {
+        transform: scale(1.06);
+      }
+
+      .event-card-body {
+        position: relative;
+        z-index: 1;
+        padding: 18px 6px 4px;
+      }
+
+      .event-card-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .event-card-badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+      }
+
+      .event-card-code {
+        margin: 0;
+        color: #8ad9ff;
+        font-family: "Open Sans", sans-serif;
+        font-size: clamp(2rem, 4vw, 2.7rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-shadow: 0 0 22px rgba(138, 217, 255, 0.2);
+        animation: upcomingCodePulse 5.8s ease-in-out infinite;
+      }
+
+      .event-card-name {
+        display: block;
+        margin-top: 8px;
+        margin-bottom: 14px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .event-card-meta {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .event-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .event-meta-item i {
+        color: #8ad9ff;
+        font-size: 0.95rem;
+      }
+
+      .event-card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #8ad9ff;
+        font-family: "Open Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .event-card-link:hover {
+        color: var(--white);
+      }
+
+      @keyframes upcomingGridDrift {
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-60px, 30px, 0); }
+      }
+
+      @keyframes upcomingAmbientGlow {
+        0%, 100% { transform: translate3d(16%, -10%, 0) scale(1.1); opacity: 0.52; }
+        50% { transform: translate3d(-8%, 6%, 0) scale(1.28); opacity: 0.88; }
+      }
+
+      @keyframes upcomingBeamSweepA {
+        0%, 100% { transform: translate3d(-6%, 0, 0) rotate(16deg); opacity: 0.26; }
+        50% { transform: translate3d(28%, 0, 0) rotate(12deg); opacity: 0.52; }
+      }
+
+      @keyframes upcomingBeamSweepB {
+        0%, 100% { transform: translate3d(8%, 0, 0) rotate(-16deg); opacity: 0.24; }
+        50% { transform: translate3d(-26%, 0, 0) rotate(-10deg); opacity: 0.48; }
+      }
+
+      @keyframes upcomingRibbonSweepA {
+        0%, 100% { transform: translate3d(-8%, 0, 0) scaleX(0.92); opacity: 0.52; }
+        50% { transform: translate3d(8%, 0, 0) scaleX(1.04); opacity: 0.95; }
+      }
+
+      @keyframes upcomingRibbonSweepB {
+        0%, 100% { transform: translate3d(10%, 0, 0) scaleX(0.9); opacity: 0.48; }
+        50% { transform: translate3d(-10%, 0, 0) scaleX(1.05); opacity: 0.9; }
+      }
+
+      @keyframes upcomingOrbitRotate {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.04); }
+        100% { transform: rotate(360deg) scale(1); }
+      }
+
+      @keyframes upcomingCardFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+
+      @keyframes upcomingCardShimmer {
+        0%, 100% { transform: translate3d(-120%, 0, 0) rotate(18deg); opacity: 0; }
+        18% { opacity: 0; }
+        42% { opacity: 0.75; }
+        58% { transform: translate3d(260%, 0, 0) rotate(18deg); opacity: 0; }
+      }
+
+      @keyframes upcomingCodePulse {
+        0%, 100% { text-shadow: 0 0 18px rgba(138, 217, 255, 0.14); opacity: 0.88; }
+        50% { text-shadow: 0 0 32px rgba(138, 217, 255, 0.32); opacity: 1; }
+      }
 
       .service-card {
-        background: var(--white);
-        border-radius: 12px;
-        padding: 40px 30px;
-        text-align: center;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 251, 253, 1) 100%);
+        border-radius: 22px;
+        padding: 40px 32px;
+        text-align: left;
         transition: var(--transition-smooth);
-        border: 1px solid var(--light-gray);
+        border: 1px solid rgba(20, 59, 102, 0.08);
         height: 100%;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 20px 45px rgba(20, 59, 102, 0.06);
       }
 
       .service-card::before {
         content: "";
         position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(65, 196, 224, 0.12), transparent 35%, transparent 70%, rgba(20, 59, 102, 0.04));
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        pointer-events: none;
+      }
+
+      .service-card::after {
+        content: "";
+        position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(
-          90deg,
-          var(--accent-cyan),
-          var(--accent-cyan-light)
-        );
-        transform: scaleX(0);
-        transition: var(--transition-smooth);
+        left: 32px;
+        right: 32px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent-cyan), rgba(65, 196, 224, 0.15));
+        transform: scaleX(0.35);
+        transform-origin: left;
+        transition: transform 0.35s ease;
       }
 
       .service-card:hover::before {
+        opacity: 1;
+      }
+
+      .service-card:hover::after {
         transform: scaleX(1);
       }
 
       .service-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 20px 50px rgba(20, 59, 102, 0.12);
-        border-color: transparent;
+        box-shadow: 0 24px 56px rgba(20, 59, 102, 0.12);
+        border-color: rgba(65, 196, 224, 0.18);
       }
 
-      .service-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(
-          135deg,
-          rgba(65, 196, 224, 0.1) 0%,
-          rgba(89, 196, 192, 0.1) 100%
-        );
-        border-radius: 50%;
+      .service-card-header {
         display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .service-card-kicker {
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        margin: 0 auto 25px;
-        transition: var(--transition-smooth);
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(20, 59, 102, 0.05);
+        border: 1px solid rgba(20, 59, 102, 0.08);
+        color: var(--primary-navy);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
       }
 
-      .service-card:hover .service-icon {
-        background: linear-gradient(
-          135deg,
-          var(--accent-cyan) 0%,
-          var(--accent-cyan-light) 100%
-        );
-      }
-
-      .service-icon i {
-        font-size: 2rem;
-        color: var(--accent-cyan);
-        transition: var(--transition-smooth);
-      }
-
-      .service-card:hover .service-icon i {
-        color: var(--white);
+      .service-card-index {
+        font-family: "Open Sans", sans-serif;
+        font-size: 2.9rem;
+        line-height: 0.9;
+        color: rgba(20, 59, 102, 0.12);
       }
 
       .service-card h4 {
@@ -515,12 +869,13 @@
       .service-card p {
         color: var(--medium-gray);
         font-size: 0.95rem;
-        margin-bottom: 20px;
+        line-height: 1.8;
+        margin-bottom: 22px;
       }
 
       .service-link {
         color: var(--accent-cyan);
-        font-family: var(--font-heading);
+        font-family: "Open Sans", sans-serif;
         font-weight: 600;
         font-size: 0.85rem;
         text-transform: uppercase;
@@ -676,80 +1031,287 @@
       }
 
       .feature-box {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 40px 30px;
-        transition: var(--transition-smooth);
+        position: relative;
         height: 100%;
+        padding: 32px 28px 28px;
+        border-radius: 24px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.12) 0%,
+          rgba(255, 255, 255, 0.04) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(18px);
+        box-shadow: 0 22px 55px rgba(0, 0, 0, 0.22);
+        overflow: hidden;
+        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      }
+
+      .feature-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.16),
+          transparent 38%,
+          transparent 62%,
+          rgba(65, 196, 224, 0.12)
+        );
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      .feature-box::after {
+        content: "";
+        position: absolute;
+        inset: auto 24px 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          rgba(65, 196, 224, 0.55),
+          rgba(255, 255, 255, 0)
+        );
+        transform: scaleX(0.55);
+        transform-origin: center;
+        transition: transform 0.35s ease;
       }
 
       .feature-box:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-5px);
-        border-color: var(--accent-cyan);
+        transform: translateY(-10px);
+        border-color: rgba(65, 196, 224, 0.6);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28);
       }
 
-      .feature-box-icon {
-        width: 65px;
-        height: 65px;
-        background: var(--accent-cyan);
-        border-radius: 12px;
+      .feature-box:hover::after {
+        transform: scaleX(1);
+      }
+
+      .feature-box-surface {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .feature-box-meta {
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-bottom: 25px;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
       }
 
-      .feature-box-icon i {
-        font-size: 1.6rem;
-        color: var(--white);
+      .feature-box-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.72rem;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+      }
+
+      .feature-box-index {
+        font-family: "Open Sans", sans-serif;
+        font-size: 2.6rem;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.14);
       }
 
       .feature-box h4 {
         color: var(--white);
-        font-size: 1.2rem;
-        margin-bottom: 15px;
+        font-size: 1.24rem;
+        margin-bottom: 14px;
       }
 
       .feature-box p {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 0.96rem;
+        line-height: 1.75;
         margin: 0;
+      }
+
+      .feature-box-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 24px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 0.8rem;
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+      }
+
+      .feature-box-arrow i {
+        font-size: 0.95rem;
+        transform: translateX(0);
+        transition: transform 0.35s ease;
+      }
+
+      .feature-box:hover .feature-box-arrow i {
+        transform: translateX(5px);
       }
 
       /* CTA Section */
       .cta-section {
-        background: linear-gradient(
-          135deg,
-          var(--accent-cyan) 0%,
-          var(--accent-cyan-dark) 100%
-        );
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.2), transparent 24%),
+          radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.14), transparent 20%),
+          linear-gradient(135deg, #14b8d4 0%, #0f5f78 52%, #082c3a 100%);
         padding: 100px 0;
         position: relative;
         overflow: hidden;
+        isolation: isolate;
       }
 
       .cta-section::before {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        inset: -12% 42% -12% -10%;
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.34) 0%,
+          rgba(255, 255, 255, 0.12) 22%,
+          rgba(255, 255, 255, 0) 58%
+        );
+        filter: blur(10px);
+        opacity: 0.55;
+        animation: ctaAurora 16s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+
+      .cta-section::after {
+        content: "";
+        position: absolute;
+        inset: auto -12% -38% 48%;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(255, 255, 255, 0.18),
+          rgba(255, 255, 255, 0.03) 46%,
+          transparent 62%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow:
+          0 0 0 22px rgba(255, 255, 255, 0.04),
+          0 0 0 70px rgba(255, 255, 255, 0.025);
+        animation: ctaOrbitalPulse 12s ease-in-out infinite;
+        pointer-events: none;
       }
 
       .cta-content {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         text-align: center;
+      }
+
+      .cta-graphics {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .cta-grid {
+        position: absolute;
+        inset: 12% 6%;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+        background-size: 70px 70px;
+        mask-image: radial-gradient(circle at center, black 35%, transparent 82%);
+        opacity: 0.3;
+        transform: perspective(1200px) rotateX(66deg) scale(1.15);
+        transform-origin: center bottom;
+      }
+
+      .cta-beam {
+        position: absolute;
+        top: -24%;
+        left: 8%;
+        width: 38%;
+        height: 160%;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.28),
+          rgba(255, 255, 255, 0)
+        );
+        opacity: 0.28;
+        filter: blur(1px);
+        transform: rotate(24deg);
+        animation: ctaBeamFloat 14s ease-in-out infinite;
+      }
+
+      .cta-ring {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        transform: translateY(-50%);
+        opacity: 0.42;
+        animation: ctaRingRotate 22s linear infinite;
+      }
+
+      .cta-ring::before,
+      .cta-ring::after {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .cta-ring::after {
+        inset: 54px;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .cta-ring-dot {
+        position: absolute;
+        top: 28px;
+        left: 50%;
+        width: 12px;
+        height: 12px;
+        margin-left: -6px;
+        border-radius: 50%;
+        background: var(--white);
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.65);
+      }
+
+      .cta-ring-secondary {
+        width: 220px;
+        height: 220px;
+        top: 24%;
+        right: auto;
+        left: 9%;
+        opacity: 0.18;
+        animation-direction: reverse;
+        animation-duration: 18s;
+      }
+
+      .cta-ring-secondary .cta-ring-dot {
+        top: auto;
+        bottom: 26px;
+        background: rgba(255, 255, 255, 0.85);
       }
 
       .cta-content h2 {
         font-size: 2.5rem;
         color: var(--white);
-        margin-bottom: 20px;
+        margin-bottom: 16px;
       }
 
       .cta-content p {
@@ -762,7 +1324,7 @@
       .cta-btn {
         background: var(--white);
         color: var(--primary-navy);
-        font-family: var(--font-heading);
+        font-family: "Open Sans", sans-serif;
         font-weight: 600;
         padding: 16px 40px;
         border-radius: 4px;
@@ -778,6 +1340,48 @@
         color: var(--white);
         transform: translateY(-3px);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      @keyframes ctaAurora {
+        0% {
+          transform: translate3d(-2%, -1%, 0) scale(1);
+        }
+        100% {
+          transform: translate3d(4%, 3%, 0) scale(1.08);
+        }
+      }
+
+      @keyframes ctaOrbitalPulse {
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 0.85;
+        }
+        50% {
+          transform: scale(1.08) rotate(6deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes ctaBeamFloat {
+        0%,
+        100% {
+          transform: rotate(24deg) translateX(0);
+          opacity: 0.2;
+        }
+        50% {
+          transform: rotate(18deg) translateX(30px);
+          opacity: 0.34;
+        }
+      }
+
+      @keyframes ctaRingRotate {
+        from {
+          transform: translateY(-50%) rotate(0deg);
+        }
+        to {
+          transform: translateY(-50%) rotate(360deg);
+        }
       }
 
       /* Responsive */
@@ -814,18 +1418,46 @@
           font-size: 2rem;
         }
 
-        .strategic-frame {
-          min-height: 270px;
-          padding: 34px 28px;
+        .cta-section::after {
+          width: 300px;
+          height: 300px;
+          inset: auto -16% -28% auto;
         }
 
-        .strategic-copy {
-          margin-top: 36px;
-          padding-left: 22px;
+        .cta-ring {
+          width: 260px;
+          height: 260px;
+          right: -2%;
+        }
+
+        .cta-ring-secondary {
+          width: 170px;
+          height: 170px;
+          left: 2%;
+        }
+
+        .strategic-frame {
+          min-height: 250px;
+          padding: 34px 24px;
+        }
+
+        .strategic-frame::before,
+        .strategic-frame::after {
+          width: 68%;
+          height: 3px;
+        }
+
+        .strategic-kicker {
+          letter-spacing: 5px;
+          margin-bottom: 14px;
+        }
+
+        .strategic-title {
+          font-size: clamp(2.2rem, 9vw, 3rem);
         }
 
         .strategic-copy p {
-          font-size: 1rem;
+          font-size: 0.95rem;
           letter-spacing: 1.6px;
         }
 
@@ -835,7 +1467,7 @@
         }
       }
 
-      @media (max-width: 767.98px) {
+            @media (max-width: 767.98px) {
         .hero-section {
           min-height: auto;
           padding-top: calc(40px + var(--navbar-height));
@@ -881,33 +1513,67 @@
           font-size: 1.7rem;
         }
 
+        .cta-grid,
+        .cta-ring-secondary {
+          display: none;
+        }
+
+        .cta-beam {
+          left: -8%;
+          width: 58%;
+        }
+
+        .cta-ring {
+          width: 220px;
+          height: 220px;
+          right: -12%;
+          opacity: 0.28;
+        }
+
+        .cta-section::after {
+          width: 240px;
+          height: 240px;
+          right: -18%;
+          bottom: -18%;
+        }
+
         .strategic-frame {
           min-height: 220px;
-          padding: 26px 20px;
+          padding: 24px 18px;
         }
 
         .strategic-frame::before,
         .strategic-frame::after {
-          display: none;
+          width: 64%;
+          height: 3px;
+        }
+
+        .strategic-frame-bend {
+          height: 14px;
+        }
+
+        .strategic-frame-bend-top {
+          left: -14px;
+          top: -14px;
+        }
+
+        .strategic-frame-bend-bottom {
+          right: -14px;
+          bottom: -14px;
         }
 
         .strategic-kicker {
-          letter-spacing: 4px;
+          letter-spacing: 5px;
+          margin-bottom: 14px;
+        }
+
+        .strategic-title {
+          font-size: clamp(2.2rem, 9vw, 3rem);
         }
 
         .strategic-copy p {
-          font-size: 0.9rem;
-          letter-spacing: 1px;
-          line-height: 1.6;
-        }
-
-        .service-card {
-          padding: 30px 22px;
-        }
-
-        .clientele-track {
-          gap: 16px;
-          animation-duration: 34s;
+          font-size: 0.95rem;
+          letter-spacing: 1.6px;
         }
 
         .client-logo-card {
@@ -920,6 +1586,23 @@
         .client-logo-card img {
           max-height: 52px;
         }
+      }
+            @media (prefers-reduced-motion: reduce) {
+        .cta-section::before,
+        .cta-section::after,
+        .cta-beam,
+        .cta-ring,
+        .upcoming-events-section::before,
+        .upcoming-events-section::after,
+        .upcoming-events-beam,
+        .upcoming-events-ribbon,
+        .upcoming-events-orbit,
+        .event-card,
+        .event-card::before,
+        .event-card-code {
+          animation: none;
+        }
+      }
       }
     </style>
   </head>
@@ -1110,15 +1793,17 @@
     <section class="section-padding strategic-advisory-section">
       <div class="container strategic-layout">
         <div class="row align-items-center g-5">
-          <div class="col-lg-6" data-aos="fade-right">
+          <div class="col-lg-6">
             <div class="strategic-frame">
-              <div>
+              <span class="strategic-frame-bend strategic-frame-bend-top" aria-hidden="true"></span>
+              <span class="strategic-frame-bend strategic-frame-bend-bottom" aria-hidden="true"></span>
+              <div class="strategic-content">
                 <span class="strategic-kicker">Strategic</span>
                 <h3 class="strategic-title">Trade <strong>Advisory</strong></h3>
               </div>
             </div>
           </div>
-          <div class="col-lg-6" data-aos="fade-left">
+          <div class="col-lg-6">
             <div class="strategic-copy">
               <p>
                 Expanding into new markets comes with both opportunities and
@@ -1165,8 +1850,9 @@
             data-aos-delay="100"
           >
             <div class="service-card">
-              <div class="service-icon">
-                <i class="bi bi-easel2"></i>
+              <div class="service-card-header">
+                <span class="service-card-kicker">Physical Events</span>
+                <span class="service-card-index">01</span>
               </div>
               <h4>Conferences &amp; Exhibitions</h4>
               <p>
@@ -1185,8 +1871,9 @@
             data-aos-delay="200"
           >
             <div class="service-card">
-              <div class="service-icon">
-                <i class="bi bi-broadcast"></i>
+              <div class="service-card-header">
+                <span class="service-card-kicker">Digital Formats</span>
+                <span class="service-card-index">02</span>
               </div>
               <h4>Virtual and Hybrid Events</h4>
               <p>
@@ -1205,8 +1892,9 @@
             data-aos-delay="300"
           >
             <div class="service-card">
-              <div class="service-icon">
-                <i class="bi bi-people-fill"></i>
+              <div class="service-card-header">
+                <span class="service-card-kicker">Executive Access</span>
+                <span class="service-card-index">03</span>
               </div>
               <h4>Strategic High-Level Meetings</h4>
               <p>
@@ -1223,6 +1911,110 @@
         <div class="row mt-5">
           <div class="col-12 text-center" data-aos="fade-up">
             <a href="{{ route('services') }}" class="btn btn-navy">View All Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ============================================
+         UPCOMING EVENTS SECTION
+         ============================================ -->
+    <section class="section-padding upcoming-events-section">
+      <div class="upcoming-events-motion" aria-hidden="true">
+        <span class="upcoming-events-beam upcoming-events-beam-1"></span>
+        <span class="upcoming-events-beam upcoming-events-beam-2"></span>
+        <span class="upcoming-events-ribbon upcoming-events-ribbon-1"></span>
+        <span class="upcoming-events-ribbon upcoming-events-ribbon-2"></span>
+        <span class="upcoming-events-orbit"></span>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="section-header" data-aos="fade-up">
+              <span class="section-label">Upcoming Events</span>
+              <h2 class="section-title">Global Upcoming Events. Strategic Conversations.</h2>
+              <p class="section-description">
+                A curated look at standout platforms shaping technology, gas,
+                and energy conversations across priority markets.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row g-4 align-items-stretch">
+          <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="100">
+            <article class="event-card">
+              <a class="event-card-media" href="https://digitalnigeria.gov.ng/" target="_blank" rel="noopener noreferrer" aria-label="Visit Digital Nigeria 2026 website">
+                <img src="{{ asset('img/upcoming/Digital_Nigeria_Website.png') }}" alt="Digital Nigeria website preview" loading="lazy" />
+              </a>
+              <div class="event-card-body">
+                <div class="event-card-topline">
+                  <span class="event-card-badge">Abuja</span>
+                </div>
+                <h4 class="event-card-code">DNICE</h4>
+                <span class="event-card-name">Digital Nigeria 2026</span>
+                <div class="event-card-meta">
+                  <div class="event-meta-item"><i class="bi bi-calendar-event"></i><span>Aug 11 - 13, 2026</span></div>
+                  <div class="event-meta-item"><i class="bi bi-geo-alt"></i><span>Abuja, Nigeria</span></div>
+                </div>
+                <a class="event-card-link" href="https://digitalnigeria.gov.ng/" target="_blank" rel="noopener noreferrer">Visit Website <i class="bi bi-arrow-up-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="180">
+            <article class="event-card">
+              <a class="event-card-media" href="https://africaenergyinvestmentsummit.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Africa Energy Investment Summit website">
+                <img src="{{ asset('img/upcoming/AEIS_Website.png') }}" alt="Africa Energy Investment Summit website preview" loading="lazy" />
+              </a>
+              <div class="event-card-body">
+                <div class="event-card-topline">
+                  <span class="event-card-badge">New York</span>
+                </div>
+                <h4 class="event-card-code">AEIS</h4>
+                <span class="event-card-name">African Energy Investment Summit</span>
+                <div class="event-card-meta">
+                  <div class="event-meta-item"><i class="bi bi-calendar-event"></i><span>Sep 25 - 27, 2026</span></div>
+                  <div class="event-meta-item"><i class="bi bi-geo-alt"></i><span>New York, USA</span></div>
+                </div>
+                <a class="event-card-link" href="https://africaenergyinvestmentsummit.com/" target="_blank" rel="noopener noreferrer">Visit Website <i class="bi bi-arrow-up-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="260">
+            <article class="event-card">
+              <a class="event-card-media" href="https://nlcgaconference.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit NLCGA conference website">
+                <img src="{{ asset('img/upcoming/NLCGA_Website.png') }}" alt="NLCGA website preview" loading="lazy" />
+              </a>
+              <div class="event-card-body">
+                <div class="event-card-topline">
+                  <span class="event-card-badge">Lagos</span>
+                </div>
+                <h4 class="event-card-code">NLCGA</h4>
+                <span class="event-card-name">NLCGA Conference 2026</span>
+                <div class="event-card-meta">
+                  <div class="event-meta-item"><i class="bi bi-calendar-event"></i><span>November 2026</span></div>
+                  <div class="event-meta-item"><i class="bi bi-geo-alt"></i><span>Lagos, Nigeria</span></div>
+                </div>
+                <a class="event-card-link" href="https://nlcgaconference.com/" target="_blank" rel="noopener noreferrer">Visit Website <i class="bi bi-arrow-up-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6 col-xl-3" data-aos="fade-up" data-aos-delay="340">
+            <article class="event-card">
+              <a class="event-card-media" href="https://nigeriaenergysummit.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Nigeria International Energy Summit website">
+                <img src="{{ asset('img/upcoming/NIES_Website.png') }}" alt="Nigeria International Energy Summit website preview" loading="lazy" />
+              </a>
+              <div class="event-card-body">
+                <div class="event-card-topline">
+                  <span class="event-card-badge">Abuja</span>
+                </div>
+                <h4 class="event-card-code">NIES</h4>
+                <span class="event-card-name">Nigeria International Energy Summit</span>
+                <div class="event-card-meta">
+                  <div class="event-meta-item"><i class="bi bi-calendar-event"></i><span>March 15 - 16, 2027</span></div>
+                  <div class="event-meta-item"><i class="bi bi-geo-alt"></i><span>Abuja, Nigeria</span></div>
+                </div>
+                <a class="event-card-link" href="https://nigeriaenergysummit.com/" target="_blank" rel="noopener noreferrer">Visit Website <i class="bi bi-arrow-up-right"></i></a>
+              </div>
+            </article>
           </div>
         </div>
       </div>
@@ -1347,14 +2139,21 @@
             data-aos-delay="100"
           >
             <div class="feature-box">
-              <div class="feature-box-icon">
-                <i class="bi bi-award"></i>
+              <div class="feature-box-surface">
+                <div class="feature-box-meta">
+                  <span class="feature-box-pill">Track Record</span>
+                  <span class="feature-box-index">01</span>
+                </div>
+                <h4>Proven Excellence</h4>
+                <p>
+                  Over 15 years of delivering exceptional results for global
+                  clients across multiple industries and continents.
+                </p>
+                <div class="feature-box-arrow">
+                  <span>Trusted execution</span>
+                  <i class="bi bi-arrow-up-right"></i>
+                </div>
               </div>
-              <h4>Proven Excellence</h4>
-              <p>
-                Over 15 years of delivering exceptional results for global
-                clients across multiple industries and continents.
-              </p>
             </div>
           </div>
           <div
@@ -1363,14 +2162,21 @@
             data-aos-delay="200"
           >
             <div class="feature-box">
-              <div class="feature-box-icon">
-                <i class="bi bi-people"></i>
+              <div class="feature-box-surface">
+                <div class="feature-box-meta">
+                  <span class="feature-box-pill">Specialists</span>
+                  <span class="feature-box-index">02</span>
+                </div>
+                <h4>Expert Team</h4>
+                <p>
+                  Seasoned professionals with deep industry knowledge and hands-on
+                  experience in international trade.
+                </p>
+                <div class="feature-box-arrow">
+                  <span>Senior insight</span>
+                  <i class="bi bi-arrow-up-right"></i>
+                </div>
               </div>
-              <h4>Expert Team</h4>
-              <p>
-                Seasoned professionals with deep industry knowledge and hands-on
-                experience in international trade.
-              </p>
             </div>
           </div>
           <div
@@ -1379,14 +2185,21 @@
             data-aos-delay="300"
           >
             <div class="feature-box">
-              <div class="feature-box-icon">
-                <i class="bi bi-lightbulb"></i>
+              <div class="feature-box-surface">
+                <div class="feature-box-meta">
+                  <span class="feature-box-pill">Strategy Design</span>
+                  <span class="feature-box-index">03</span>
+                </div>
+                <h4>Innovative Solutions</h4>
+                <p>
+                  Tailored strategies that address unique challenges and unlock
+                  new opportunities in global markets.
+                </p>
+                <div class="feature-box-arrow">
+                  <span>Built for growth</span>
+                  <i class="bi bi-arrow-up-right"></i>
+                </div>
               </div>
-              <h4>Innovative Solutions</h4>
-              <p>
-                Tailored strategies that address unique challenges and unlock
-                new opportunities in global markets.
-              </p>
             </div>
           </div>
           <div
@@ -1395,14 +2208,21 @@
             data-aos-delay="400"
           >
             <div class="feature-box">
-              <div class="feature-box-icon">
-                <i class="bi bi-diagram-3"></i>
+              <div class="feature-box-surface">
+                <div class="feature-box-meta">
+                  <span class="feature-box-pill">Client Value</span>
+                  <span class="feature-box-index">04</span>
+                </div>
+                <h4>Lasting Partnerships</h4>
+                <p>
+                  Building relationships founded on trust, collaboration, and
+                  measurable impact for our clients.
+                </p>
+                <div class="feature-box-arrow">
+                  <span>Long-term impact</span>
+                  <i class="bi bi-arrow-up-right"></i>
+                </div>
               </div>
-              <h4>Lasting Partnerships</h4>
-              <p>
-                Building relationships founded on trust, collaboration, and
-                measurable impact for our clients.
-              </p>
             </div>
           </div>
         </div>
@@ -1413,6 +2233,16 @@
          CTA SECTION
          ============================================ -->
     <section class="cta-section">
+      <div class="cta-graphics" aria-hidden="true">
+        <span class="cta-grid"></span>
+        <span class="cta-beam"></span>
+        <span class="cta-ring">
+          <span class="cta-ring-dot"></span>
+        </span>
+        <span class="cta-ring cta-ring-secondary">
+          <span class="cta-ring-dot"></span>
+        </span>
+      </div>
       <div class="container">
         <div class="cta-content" data-aos="zoom-in">
           <h2>Ready to Expand Your Global Reach?</h2>
@@ -1696,6 +2526,72 @@
     </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
