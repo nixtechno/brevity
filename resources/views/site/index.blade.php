@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -295,6 +295,7 @@
             var(--dark-navy) 100%
           );
         overflow: hidden;
+        isolation: isolate;
       }
 
       .strategic-advisory-section::before {
@@ -307,11 +308,125 @@
           rgba(26, 74, 122, 0.56) 48%,
           rgba(13, 40, 68, 0.72) 100%
         );
+        z-index: 0;
+      }
+
+      .strategic-advisory-section::after {
+        content: "";
+        position: absolute;
+        inset: -12% 42% -12% -10%;
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.24) 0%,
+          rgba(255, 255, 255, 0.08) 22%,
+          rgba(255, 255, 255, 0) 58%
+        );
+        filter: blur(10px);
+        opacity: 0.4;
+        animation: ctaAurora 16s ease-in-out infinite alternate;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .strategic-motion {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .strategic-grid {
+        position: absolute;
+        inset: 12% 6%;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+        background-size: 70px 70px;
+        mask-image: radial-gradient(circle at center, black 35%, transparent 82%);
+        opacity: 0.18;
+        transform: perspective(1200px) rotateX(66deg) scale(1.15);
+        transform-origin: center bottom;
+      }
+
+      .strategic-beam {
+        position: absolute;
+        top: -24%;
+        left: 8%;
+        width: 38%;
+        height: 160%;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.22),
+          rgba(255, 255, 255, 0)
+        );
+        opacity: 0.22;
+        filter: blur(1px);
+        transform: rotate(24deg);
+        animation: ctaBeamFloat 14s ease-in-out infinite;
+      }
+
+      .strategic-ring {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transform: translateY(-50%);
+        opacity: 0.32;
+        animation: ctaRingRotate 22s linear infinite;
+        box-shadow:
+          0 0 0 22px rgba(255, 255, 255, 0.03),
+          0 0 0 70px rgba(255, 255, 255, 0.02);
+      }
+
+      .strategic-ring::before,
+      .strategic-ring::after {
+        content: "";
+        position: absolute;
+        inset: 16px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .strategic-ring::after {
+        inset: 54px;
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .strategic-ring-dot {
+        position: absolute;
+        top: 28px;
+        left: 50%;
+        width: 12px;
+        height: 12px;
+        margin-left: -6px;
+        border-radius: 50%;
+        background: var(--white);
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.55);
+      }
+
+      .strategic-ring-secondary {
+        width: 220px;
+        height: 220px;
+        top: 24%;
+        right: auto;
+        left: 9%;
+        opacity: 0.14;
+        animation-direction: reverse;
+        animation-duration: 18s;
+      }
+
+      .strategic-ring-secondary .strategic-ring-dot {
+        top: auto;
+        bottom: 26px;
+        background: rgba(255, 255, 255, 0.85);
       }
 
       .strategic-layout {
         position: relative;
-        z-index: 2;
+        z-index: 1;
       }
 
       .strategic-frame {
@@ -1222,8 +1337,25 @@
         pointer-events: none;
       }
 
+      .cta-watermark {
+        position: absolute;
+        right: 6%;
+        bottom: -12%;
+        width: 485px;
+        height: 485px;
+        background: url("{{ data_get($settings, 'logo_path', asset('BREVITY_logo.png')) }}") center/contain no-repeat;
+        opacity: 0.14;
+        filter: grayscale(100%) contrast(1.05);
+        mix-blend-mode: normal;
+        transform: rotate(-8deg);
+        transform-origin: center;
+        animation: none;
+        z-index: 2;
+      }
+
       .cta-grid {
         position: absolute;
+        z-index: 1;
         inset: 12% 6%;
         background-image:
           linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
@@ -1237,6 +1369,7 @@
 
       .cta-beam {
         position: absolute;
+        z-index: 1;
         top: -24%;
         left: 8%;
         width: 38%;
@@ -1254,6 +1387,7 @@
 
       .cta-ring {
         position: absolute;
+        z-index: 1;
         top: 50%;
         right: 10%;
         width: 340px;
@@ -1418,6 +1552,14 @@
           font-size: 2rem;
         }
 
+        .cta-watermark {
+          width: 385px;
+          height: 385px;
+          right: 2%;
+          bottom: -6%;
+          opacity: 0.12;
+        }
+
         .cta-section::after {
           width: 300px;
           height: 300px;
@@ -1431,6 +1573,18 @@
         }
 
         .cta-ring-secondary {
+          width: 170px;
+          height: 170px;
+          left: 2%;
+        }
+
+        .strategic-ring {
+          width: 260px;
+          height: 260px;
+          right: -2%;
+        }
+
+        .strategic-ring-secondary {
           width: 170px;
           height: 170px;
           left: 2%;
@@ -1513,12 +1667,27 @@
           font-size: 1.7rem;
         }
 
+        .cta-watermark {
+          width: 280px;
+          height: 280px;
+          right: -2%;
+          bottom: 2%;
+          opacity: 0.1;
+        }
+
         .cta-grid,
-        .cta-ring-secondary {
+        .cta-ring-secondary,
+        .strategic-grid,
+        .strategic-ring-secondary {
           display: none;
         }
 
         .cta-beam {
+          left: -8%;
+          width: 58%;
+        }
+
+        .strategic-beam {
           left: -8%;
           width: 58%;
         }
@@ -1528,6 +1697,13 @@
           height: 220px;
           right: -12%;
           opacity: 0.28;
+        }
+
+        .strategic-ring {
+          width: 220px;
+          height: 220px;
+          right: -12%;
+          opacity: 0.24;
         }
 
         .cta-section::after {
@@ -1588,6 +1764,9 @@
         }
       }
             @media (prefers-reduced-motion: reduce) {
+        .strategic-advisory-section::after,
+        .strategic-beam,
+        .strategic-ring,
         .cta-section::before,
         .cta-section::after,
         .cta-beam,
@@ -1791,6 +1970,16 @@
          STRATEGIC ADVISORY SECTION
          ============================================ -->
     <section class="section-padding strategic-advisory-section">
+      <div class="strategic-motion" aria-hidden="true">
+        <span class="strategic-grid"></span>
+        <span class="strategic-beam"></span>
+        <span class="strategic-ring">
+          <span class="strategic-ring-dot"></span>
+        </span>
+        <span class="strategic-ring strategic-ring-secondary">
+          <span class="strategic-ring-dot"></span>
+        </span>
+      </div>
       <div class="container strategic-layout">
         <div class="row align-items-center g-5">
           <div class="col-lg-6">
@@ -2234,14 +2423,9 @@
          ============================================ -->
     <section class="cta-section">
       <div class="cta-graphics" aria-hidden="true">
+        <span class="cta-watermark"></span>
         <span class="cta-grid"></span>
         <span class="cta-beam"></span>
-        <span class="cta-ring">
-          <span class="cta-ring-dot"></span>
-        </span>
-        <span class="cta-ring cta-ring-secondary">
-          <span class="cta-ring-dot"></span>
-        </span>
       </div>
       <div class="container">
         <div class="cta-content" data-aos="zoom-in">
@@ -2526,6 +2710,15 @@
     </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 

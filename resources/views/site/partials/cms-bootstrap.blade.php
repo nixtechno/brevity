@@ -5,17 +5,10 @@
     const cmsSections = @json($sections ?? []);
 
     const siteName = cmsSettings.site_name || "Brevity Anderson";
-    const fallbackLogoPath = "{{ asset('BREVITY_logo.png') }}";
-    const logoPath = cmsSettings.logo_path || fallbackLogoPath;
+    const logoPath = cmsSettings.logo_path || "{{ asset('BREVITY_logo.png') }}";
     const socialLinks = cmsSettings.social_links || {};
 
     document.querySelectorAll(".navbar-brand img, .footer-logo img").forEach((img) => {
-      img.addEventListener("error", function handleLogoError() {
-        if (img.src !== fallbackLogoPath) {
-          img.src = fallbackLogoPath;
-        }
-      }, { once: true });
-
       img.src = logoPath;
       img.alt = `${siteName} Logo`;
     });
